@@ -3,10 +3,18 @@ var gulp           = require('gulp'),
     autoprefixer   = require('gulp-autoprefixer'),
     sourcemaps     = require('gulp-sourcemaps'),
     gulpIf         = require('gulp-if'),
+    watch          = require('gulp-watch'),
     browserSync    = require('browser-sync').create();
 
 
 var isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+
+
+gulp.task('serve', function() {
+  browserSync.init({
+    server: './build'
+  })
+});
 
 
 gulp.task('styles', function() {
@@ -15,11 +23,26 @@ gulp.task('styles', function() {
     .pipe(sass())
     .pipe(autoprefixer())
     .pipe(gulpIf(isDevelopment, sourcemaps.write()))
-    .pipe(gulp.dest('build/assets/styles'));
+    .pipe(gulp.dest('build/assets/styles'))
+    .pipe(browserSync.stream());;
 });
 
+
 gulp.task('html', function() {
-  return gulp.src('app/**/*.html', {since: gulp.lastRun('assets')})
-    .pipe(debug({title: 'assets'}))
-    .pipe(gulp.dest('build'));
+  return gulp.src('app/**/*.html')
+    .pipe(gulp.dest('build'))
+    .pipe(browserSync.stream());;
 });
+
+
+gulp.task('watch', function() {
+  watch('app/**/*.html', function(event, cb) {
+    gulp.start('html');
+  });
+
+  watch('app/**/*.sass', function(event, cb) {
+    gulp.start('styles');
+  });
+});
+
+gulp.task('default', ['serve', 'html', 'styles', 'watch']);
