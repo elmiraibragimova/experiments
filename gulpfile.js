@@ -17,3 +17,9 @@ gulp.task('styles', function() {
     .pipe(gulpIf(isDevelopment, sourcemaps.write()))
     .pipe(gulp.dest('build/assets/styles'));
 });
+
+gulp.task('html', function() {
+  return gulp.src('app/**/*.html', {since: gulp.lastRun('assets')})
+    .pipe(debug({title: 'assets'}))
+    .pipe(gulp.dest('build'));
+});
