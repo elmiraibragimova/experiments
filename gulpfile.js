@@ -40,9 +40,10 @@ gulp.task('watch', function() {
     gulp.start('html');
   });
 
-  watch('app/**/*.sass', function(event, cb) {
+  watch('app/**/*.scss', function(event, cb) {
     gulp.start('styles');
   });
 });
+
 
 gulp.task('default', ['serve', 'html', 'styles', 'watch']);
