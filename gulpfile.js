@@ -14,7 +14,7 @@ var isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === 'developme
 gulp.task('serve', function() {
   browserSync.init({
     server: {
-      baseDir: "build"
+      baseDir: "./build"
     }
   });
 });
@@ -24,6 +24,7 @@ gulp.task('styles', function() {
   return gulp.src('app/assets/styles/main.scss')
     .pipe(gulpIf(isDevelopment, sourcemaps.init()))
     .pipe(stylelint({
+      failAfterError: false,
       reporters: [{
         formatter: 'string',
         console: true
