@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "color-hex-case": "lower",
+    "color-hex-length": "short",
+    "value-no-vendor-prefix": true,
+    "declaration-colon-space-after": "always",
+    "indentation": [2, {
+      "except": ["value"]
+    }],
+    "max-empty-lines": 2,
+    "rule-nested-empty-line-before": [ "always", {
+      "except": ["first-nested"],
+      "ignore": ["after-comment"]
+    } ]
+  }
+}
