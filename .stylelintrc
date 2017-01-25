@@ -1,16 +1,29 @@
 {
   "rules": {
+    "at-rule-no-vendor-prefix": true,
     "color-hex-case": "lower",
     "color-hex-length": "short",
-    "value-no-vendor-prefix": true,
+    "declaration-colon-space-after": "always",
+    "declaration-colon-space-after": "always",
     "declaration-colon-space-after": "always",
     "indentation": [2, {
       "except": ["value"]
     }],
+    "function-calc-no-unspaced-operator": true,
+    "function-comma-space-after": "always",
+    "function-whitespace-after": "always",
+    "function-url-quotes": ["always", {
+      "exept": ["empty"]
+    }],
+    "length-zero-no-unit": true,
     "max-empty-lines": 2,
+    "no-unknown-animations": true,
+    "property-no-vendor-prefix": true,
     "rule-nested-empty-line-before": [ "always", {
       "except": ["first-nested"],
       "ignore": ["after-comment"]
-    } ]
+    } ],
+    "string-quotes": "double",
+    "value-no-vendor-prefix": true
   }
 }
