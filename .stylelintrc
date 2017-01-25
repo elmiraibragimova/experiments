@@ -4,8 +4,6 @@
     "color-hex-case": "lower",
     "color-hex-length": "short",
     "declaration-colon-space-after": "always",
-    "declaration-colon-space-after": "always",
-    "declaration-colon-space-after": "always",
     "indentation": [2, {
       "except": ["value"]
     }],
@@ -13,7 +11,7 @@
     "function-comma-space-after": "always",
     "function-whitespace-after": "always",
     "function-url-quotes": ["always", {
-      "exept": ["empty"]
+      "except": ["empty"]
     }],
     "length-zero-no-unit": true,
     "max-empty-lines": 2,
