@@ -1,4 +1,8 @@
+@mixin text-color($color: salmon) {
+  color: $color;
+}
+
 h1 {
-  color: #000000;
+  @include text-color;
   font-size: 2.5em;
 }

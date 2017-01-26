@@ -1,4 +1,7 @@
 {
+  "plugins": [
+    "stylelint-scss"
+  ],
   "rules": {
     "at-rule-no-vendor-prefix": true,
     "color-hex-case": "lower",
@@ -22,6 +25,9 @@
       "ignore": ["after-comment"]
     } ],
     "string-quotes": "double",
-    "value-no-vendor-prefix": true
+    "value-no-vendor-prefix": true,
+
+    "scss/at-import-no-partial-leading-underscore": true,
+    "scss/at-mixin-argumentless-call-parentheses": "never"
   }
 }
