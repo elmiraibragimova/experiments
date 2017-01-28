@@ -5,7 +5,10 @@ var gulp           = require('gulp'),
     gulpIf         = require('gulp-if'),
     watch          = require('gulp-watch'),
     stylelint      = require('gulp-stylelint'),
-    browserSync    = require('browser-sync').create();
+    browserSync    = require('browser-sync').create()
+    webpackStream  = require('webpack-stream'),
+    webpack        = webpackStream.webpack,
+    path           = require('path');
 
 
 var isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
@@ -34,14 +37,14 @@ gulp.task('styles', function() {
     .pipe(autoprefixer())
     .pipe(gulpIf(isDevelopment, sourcemaps.write()))
     .pipe(gulp.dest('build/assets/styles'))
-    .pipe(browserSync.stream());;
+    .pipe(browserSync.stream());
 });
 
 
 gulp.task('html', function() {
   return gulp.src('app/**/*.html')
     .pipe(gulp.dest('build'))
-    .pipe(browserSync.stream());;
+    .pipe(browserSync.stream());
 });
 
 
@@ -56,4 +59,31 @@ gulp.task('watch', function() {
 });
 
 
-gulp.task('default', ['serve', 'html', 'styles', 'watch']);
+gulp.task('js', function() {
+  var options = {
+    output: {
+      publicPath: '/js',
+      filename: 'bundle.js'
+    },
+
+    watch: true,
+
+    devtool: isDevelopment ? 'cheap-module-inline-source-map' : null,
+
+    module:  {
+      loaders: [{
+        test:    /\.js$/,
+        include: path.join(__dirname, "app"),
+        loader:  'babel?presets[]=es2015'
+      }]
+    },
+  }
+
+  return gulp.src('app/**/*.js')
+    .pipe(webpackStream(options))
+    .pipe(gulp.dest('build/assets/js'))
+    .pipe(browserSync.stream());
+});
+
+
+gulp.task('default', ['serve', 'html', 'styles', 'js', 'watch']);
