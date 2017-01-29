@@ -1,14 +1,13 @@
-var gulp           = require('gulp'),
-    sass           = require('gulp-sass'),
-    autoprefixer   = require('gulp-autoprefixer'),
-    sourcemaps     = require('gulp-sourcemaps'),
-    gulpIf         = require('gulp-if'),
-    watch          = require('gulp-watch'),
-    stylelint      = require('gulp-stylelint'),
-    browserSync    = require('browser-sync').create()
-    webpackStream  = require('webpack-stream'),
-    webpack        = webpackStream.webpack,
-    path           = require('path');
+var gulp         = require('gulp'),
+  sass           = require('gulp-sass'),
+  autoprefixer   = require('gulp-autoprefixer'),
+  sourcemaps     = require('gulp-sourcemaps'),
+  gulpIf         = require('gulp-if'),
+  watch          = require('gulp-watch'),
+  stylelint      = require('gulp-stylelint'),
+  browserSync    = require('browser-sync').create(),
+  webpackStream  = require('webpack-stream'),
+  path           = require('path');
 
 
 var isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
@@ -17,7 +16,7 @@ var isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === 'developme
 gulp.task('serve', function() {
   browserSync.init({
     server: {
-      baseDir: "./build"
+      baseDir: './build'
     }
   });
 });
@@ -49,11 +48,11 @@ gulp.task('html', function() {
 
 
 gulp.task('watch', function() {
-  watch('app/**/*.html', function(event, cb) {
+  watch('app/**/*.html', function() {
     gulp.start('html');
   });
 
-  watch('app/**/*.scss', function(event, cb) {
+  watch('app/**/*.scss', function() {
     gulp.start('styles');
   });
 });
@@ -73,11 +72,11 @@ gulp.task('js', function() {
     module:  {
       loaders: [{
         test:    /\.js$/,
-        include: path.join(__dirname, "app"),
+        include: path.join(__dirname, 'app'),
         loader:  'babel?presets[]=es2015'
       }]
     },
-  }
+  };
 
   return gulp.src('app/**/*.js')
     .pipe(webpackStream(options))
