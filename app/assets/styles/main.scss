@@ -1,8 +1,1 @@
-@mixin text-color($color: salmon) {
-  color: $color;
-}
-
-h1 {
-  @include text-color;
-  font-size: 2.5em;
-}
+@import "normalize";
